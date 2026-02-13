@@ -20,5 +20,8 @@ Includes Role-Based Access Control (RBAC) for Admins and Users.
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/whoabuu/Intern](https://github.com/whoabuu/Intern)
+# 1. Download the code
+git clone https://github.com/whoabuu/Intern.git
+
+# 2. Go into the folder
 cd Intern
