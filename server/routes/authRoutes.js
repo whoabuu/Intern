@@ -1,10 +1,31 @@
-
 import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
 const router = express.Router();
+
+/**
+ * @swagger
+ * components:
+ * schemas:
+ * User:
+ * type: object
+ * required:
+ * - username
+ * - email
+ * - password
+ * properties:
+ * username:
+ * type: string
+ * description: The user's name
+ * email:
+ * type: string
+ * description: The user's email address
+ * password:
+ * type: string
+ * description: The user's password
+ */
 
 /**
  * @swagger
@@ -17,45 +38,54 @@ const router = express.Router();
  * content:
  * application/json:
  * schema:
- * type: object
- * required:
- * - username
- * - email
- * - password
- * properties:
- * username:
- * type: string
- * email:
- * type: string
- * password:
- * type: string
+ * $ref: '#/components/schemas/User'
  * responses:
  * 201:
  * description: User created successfully
  * 500:
  * description: Server error
  */
-// Register
 router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
- 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({
       username,
       email,
       password: hashedPassword,
-      role: "admin",
     });
-
     res.status(201).json({ message: "User created" });
   } catch (err) {
-
     res.status(500).json({ error: err.message });
   }
 });
 
-// Login
+/**
+ * @swagger
+ * /auth/login:
+ * post:
+ * summary: Log in a user
+ * tags: [Auth]
+ * requestBody:
+ * required: true
+ * content:
+ * application/json:
+ * schema:
+ * type: object
+ * required:
+ * - email
+ * - password
+ * properties:
+ * email:
+ * type: string
+ * password:
+ * type: string
+ * responses:
+ * 200:
+ * description: Login successful (Returns Token)
+ * 400:
+ * description: Invalid credentials
+ */
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
