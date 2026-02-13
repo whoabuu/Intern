@@ -1,3 +1,4 @@
+
 import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -5,6 +6,35 @@ import User from "../models/User.js";
 
 const router = express.Router();
 
+/**
+ * @swagger
+ * /auth/register:
+ * post:
+ * summary: Register a new user
+ * tags: [Auth]
+ * requestBody:
+ * required: true
+ * content:
+ * application/json:
+ * schema:
+ * type: object
+ * required:
+ * - username
+ * - email
+ * - password
+ * properties:
+ * username:
+ * type: string
+ * email:
+ * type: string
+ * password:
+ * type: string
+ * responses:
+ * 201:
+ * description: User created successfully
+ * 500:
+ * description: Server error
+ */
 // Register
 router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
