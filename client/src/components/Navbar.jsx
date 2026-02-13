@@ -17,7 +17,7 @@ const Navbar = () => {
         to="/"
         className="text-xl font-bold text-orange-500 flex items-center gap-2"
       >
-        <Car /> DriveRental
+        <Car /> Service
       </Link>
       <div className="flex gap-4">
         {!token ? (

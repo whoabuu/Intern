@@ -12,7 +12,7 @@ const Dashboard = () => {
     try {
       const token = localStorage.getItem("token");
       const { data } = await axios.get(
-        "http://localhost:5000/api/v1/bookings",
+        "http://localhost:5002/api/v1/bookings",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -32,7 +32,7 @@ const Dashboard = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.post("http://localhost:5000/api/v1/bookings", formData, {
+      await axios.post("http://localhost:5002/api/v1/bookings", formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Booking Added");
@@ -48,7 +48,7 @@ const Dashboard = () => {
     if (!window.confirm("Are you sure?")) return;
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/v1/bookings/${id}`, {
+      await axios.delete(`http://localhost:5002/api/v1/bookings/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Booking Deleted");

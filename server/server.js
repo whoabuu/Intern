@@ -23,5 +23,5 @@ mongoose
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/bookings", bookingRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5002;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
